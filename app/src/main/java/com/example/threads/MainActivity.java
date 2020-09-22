@@ -3,6 +3,7 @@ package com.example.threads;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,11 +22,26 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final Handler h = new Handler();
                 Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
+                            h.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    textView.setText(MainActivity.this.getString(R.string.begin));
+//                                    а теперь мы сможем отредактировать textView из другого потока
+                                }
+                            });
                             Thread.sleep(10000);
+                            h.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    textView.setText(MainActivity.this.getString(R.string.end));
+//                                    а теперь мы сможем отредактировать textView из другого потока
+                                }
+                            });
                         } catch (InterruptedException e){
 
                         }
