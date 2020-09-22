@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Threads</string>
+    <string name="brechnung_starten">Brechnung starten</string>
+    <string name="eine_checkbox">eine Checkbox</string>
+    <string name="begin">Begin</string>
+    <string name="end">End</string>
+</resources>
