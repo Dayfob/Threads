@@ -21,14 +21,28 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                textView.setText("Rechnung star");
-                textView.setText(MainActivity.this.getString(R.string.begin));
-                try {
-                    Thread.sleep(3500);
-                } catch (InterruptedException e){
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(10000);
+                        } catch (InterruptedException e){
 
-                }
-                textView.setText(MainActivity.this.getString(R.string.end));
+                        }
+//                        textView.setText(MainActivity.this.getString(R.string.begin));
+//                        textView.setText(MainActivity.this.getString(R.string.end));
+//                        При изменении textView, созданных в одном потоке, из другого потока выходит ошибкак
+                    }
+                });
+                thread.start();
+//                textView.setText(MainActivity.this.getString(R.string.begin));
+//                try {
+//                    Thread.sleep(3500);
+//                } catch (InterruptedException e){
+//
+//                }
+//                textView.setText(MainActivity.this.getString(R.string.end));
+//                При выполнении этого кода, нельзя взаимодействовать с элементами этого потока во время Thread.sleep(3500);
             }
         });
 
